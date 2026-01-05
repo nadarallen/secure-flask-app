@@ -1,77 +1,96 @@
 # Secure Flask App
 
-A secure web application built with Flask, implementing best security practices to protect against common vulnerabilities.
+A secure, modern web application built with Flask, implementing best security practices and a premium user interface.
 
-## Features
-- User authentication and authorization
-- Secure session management
-- Protection against SQL Injection, XSS, and CSRF attacks
-- Secure password hashing
-- Logging and monitoring
-- API security best practices
+## 🚀 Features
 
-## Installation
+### Security
 
-### Prerequisites
-- Python 3.x
-- Flask
-- Virtual Environment (recommended)
+- **User Authentication**: Secure session management using `Flask-Login`.
+- **Password Hashing**: Industry-standard `bcrypt` hashing for password storage.
+- **Form Security**: CSRF protection and strict validation using `Flask-WTF`.
+- **SQL Injection Protection**: Uses `Flask-SQLAlchemy` ORM to prevent SQL injection.
+- **Secure Configuration**: Environment variables for sensitive data using `python-dotenv`.
 
-### Setup
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/nadarallen/secure-flask-app.git
-   cd secure-flask-app
-   ```
-2. Create and activate a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use: venv\Scripts\activate
-   ```
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Set environment variables (for development):
-   ```bash
-   export FLASK_APP=app.py
-   export FLASK_ENV=development
-   ```
-   On Windows (cmd):
-   ```cmd
-   set FLASK_APP=app.py
-   set FLASK_ENV=development
-   ```
-5. Run the application:
-   ```bash
-   flask run
-   ```
+### User Interface
 
-## Security Features Implemented
-- **Input Validation:** Prevents SQL Injection and XSS attacks.
-- **CSRF Protection:** Implements CSRF tokens for secure form submissions.
-- **Secure Authentication:** Uses hashed passwords and session management.
-- **Logging and Monitoring:** Keeps track of authentication attempts and errors.
+- **Modern Design**: Built with **Tailwind CSS** for a clean, responsive, and premium look.
+- **User Experience**: Flash messages for feedback, smooth transitions, and intuitive layouts.
 
-## Folder Structure
+## 🛠️ Tech Stack
+
+- **Backend**: Flask, Flask-SQLAlchemy, Flask-Login, Flask-WTF, Flask-Bcrypt
+- **Frontend**: HTML5, Tailwind CSS (via CDN)
+- **Database**: SQLite (Development), easy upgrade to PostgreSQL
+
+## 📂 Project Structure
+
 ```
 secure-flask-app/
-│── app.py          # Main application file
-│── config.py       # Configuration settings
-│── requirements.txt  # Dependencies
-│── static/         # Static files (CSS, JS, images)
-│── templates/      # HTML templates
-│── models.py       # Database models
-│── routes.py       # Application routes
-└── utils/          # Helper functions
+│── app.py           # Application entry point & factory
+│── config.py        # Configuration settings
+│── models.py        # Database models (User)
+│── forms.py         # WTForms implementation
+│── routes.py        # Route logic & authentication
+│── requirements.txt # Project dependencies
+│── .env             # Environment variables (git-ignored)
+│── templates/       # HTML Templates (Login, Signup, Dashboard)
+│── static/          # Static assets
+└── instance/        # Database storage (created on run)
 ```
 
-## Contributing
-Contributions are welcome! Feel free to fork this repository, make improvements, and submit a pull request.
+## ⚡ Installation & Setup
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+1. **Clone the repository:**
 
-## Contact
-For any inquiries or contributions, reach out to [Allen](https://github.com/nadarallen).
+    ```bash
+    git clone https://github.com/nadarallen/secure-flask-app.git
+    cd secure-flask-app
+    ```
 
+2. **Create a Virtual Environment:**
+
+    ```bash
+    python -m venv venv
+    
+    # Windows
+    venv\Scripts\activate
+    
+    # macOS/Linux
+    source venv/bin/activate
+    ```
+
+3. **Install Dependencies:**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. **Set Environment Variables:**
+    Create a `.env` file in the root directory:
+
+    ```env
+    SECRET_KEY=your_secure_random_key
+    DATABASE_URL=sqlite:///users.db
+    ```
+
+5. **Run the Application:**
+
+    ```bash
+    flask run
+    ```
+
+    Access the app at `http://127.0.0.1:5000`.
+
+## 🛡️ API & Security Details
+
+- **Input Validation**: Strict regex patterns for usernames and passwords.
+- **Session Security**: HTTPOnly cookies (default Flask behavior) and session fix protection.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request.
+
+## 📄 License
+
+MIT License.

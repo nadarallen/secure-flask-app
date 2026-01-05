@@ -1,37 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Secure App{% endblock %}</title>
+    <title>{% block title %}SECURE_SYSTEM_V1{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['"Share Tech Mono"', 'monospace'],
+                    },
+                    colors: {
+                        sec: {
+                            900: '#0a0a0a',
+                            800: '#111111',
+                            700: '#1a1a1a',
+                            green: '#00ff41',
+                            cyan: '#0ea5e9',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body {
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .glitch-text {
+            text-shadow: 2px 0 #00ff41, -2px 0 #0ea5e9;
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+
+<body class="bg-sec-900 text-gray-300 min-h-screen flex flex-col selection:bg-sec-green selection:text-black">
     {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <div class="fixed top-4 right-4 z-50 space-y-2">
-                {% for category, message in messages %}
-                    <div class="px-4 py-3 rounded shadow-lg 
-                        {% if category == 'success' %}bg-green-100 text-green-800 border-l-4 border-green-500
-                        {% elif category == 'danger' %}bg-red-100 text-red-800 border-l-4 border-red-500
-                        {% else %}bg-blue-100 text-blue-800 border-l-4 border-blue-500{% endif %}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
+    {% if messages %}
+    <div class="fixed top-4 right-4 z-50 space-y-2">
+        {% for category, message in messages %}
+        <div class="px-4 py-3 border-l-4 shadow-[0_0_10px_rgba(0,255,65,0.2)]
+                        {% if category == 'success' %}bg-sec-800 text-sec-green border-sec-green
+                        {% elif category == 'danger' %}bg-sec-800 text-red-500 border-red-500
+                        {% else %}bg-sec-800 text-sec-cyan border-sec-cyan{% endif %}">
+            <span class="mr-2">[{% if category == 'success' %}SUCCESS{% elif category == 'danger' %}ERROR{% else
+                %}INFO{% endif %}]</span> {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
     {% endwith %}
 
-    <main class="flex-grow flex items-center justify-center p-4">
-        {% block content %}{% endblock %}
+    <main class="flex-grow flex items-center justify-center p-4 relative overflow-hidden">
+        <!-- Background decorative grid -->
+        <div class="absolute inset-0 z-0 opacity-10 pointer-events-none"
+            style="background-image: linear-gradient(#00ff41 1px, transparent 1px), linear-gradient(90deg, #00ff41 1px, transparent 1px); background-size: 40px 40px;">
+        </div>
+
+        <div class="relative z-10 w-full flex justify-center">
+            {% block content %}{% endblock %}
+        </div>
     </main>
 
-    <footer class="text-center py-4 text-gray-500 text-sm">
-        &copy; 2026 Secure App. Built with Flask & Tailwind.
+    <footer class="text-center py-4 text-gray-600 text-xs border-t border-sec-800 bg-sec-900 z-10">
+        &copy; 2026 SECURE_SYSTEM__Core // <span class="text-sec-green">STATUS: ONLINE</span>
     </footer>
 </body>
+
 </html>

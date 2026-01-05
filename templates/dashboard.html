@@ -1,36 +1,84 @@
 {% extends "base.html" %}
 
-{% block title %}Dashboard - Secure App{% endblock %}
+{% block title %}DASHBOARD // SECURE_CORE{% endblock %}
 
 {% block content %}
-<div class="text-center">
-    <div class="bg-white p-10 rounded-xl shadow-lg max-w-2xl mx-auto">
-        <div class="bg-blue-100 rounded-full h-24 w-24 flex items-center justify-center mx-auto mb-6">
-            <svg class="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
+<div class="w-full max-w-4xl">
+    <!-- Header -->
+    <div class="mb-8 flex items-end justify-between border-b border-gray-800 pb-4">
+        <div>
+            <h1 class="text-4xl text-white font-bold tracking-tighter"><span class="text-sec-green">USER:</span> {{
+                username }}</h1>
+            <p class="text-gray-500 text-sm mt-1">ACCESS_LEVEL: <span class="text-sec-cyan">AUTHORIZED</span></p>
         </div>
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">Welcome, {{ username }}!</h1>
-        <p class="text-gray-600 mb-8 text-lg">You have successfully logged into the secure dashboard.</p>
+        <div class="text-right">
+            <p class="text-xs text-gray-600">SYSTEM_TIME</p>
+            <p class="text-sec-green font-mono" id="clock">00:00:00</p>
+        </div>
+    </div>
 
-        <div class="p-6 bg-gray-50 rounded-lg border border-gray-200 mb-8">
-            <h3 class="font-bold text-gray-700 mb-2">Security Status</h3>
-            <div class="flex items-center justify-center space-x-2 text-green-600 font-medium">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Security Status Card -->
+        <div
+            class="bg-sec-800 border border-sec-green/30 p-6 shadow-[0_0_15px_rgba(0,255,65,0.1)] relative overflow-hidden group hover:border-sec-green/60 transition-colors">
+            <div class="absolute top-2 right-2 opacity-50">
+                <svg class="w-16 h-16 text-sec-green spin-slow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
-                <span>Encrypted Session Active</span>
+            </div>
+            <h3 class="text-sec-green text-sm uppercase tracking-widest mb-4 border-b border-gray-700 pb-2 w-max">
+                SECURITY_METRICS</h3>
+
+            <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-400 text-sm">ENCRYPTION</span>
+                    <span class="text-sec-green text-sm">AES-256 [ACTIVE]</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-400 text-sm">SESSION_ID</span>
+                    <span class="text-gray-600 text-xs font-mono">SEC-{{ range(1000, 9999) | random }}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-400 text-sm">LAST_LOGIN</span>
+                    <span class="text-sec-cyan text-sm">JUST_NOW</span>
+                </div>
             </div>
         </div>
 
+        <!-- System Logs Card -->
+        <div class="bg-sec-800 border border-gray-800 p-6 relative">
+            <h3 class="text-gray-500 text-sm uppercase tracking-widest mb-4 border-b border-gray-800 pb-2 w-max">
+                SYSTEM_LOGS</h3>
+            <ul class="space-y-2 text-xs font-mono h-32 overflow-hidden">
+                <li class="text-gray-500"><span class="text-sec-green">>></span> Connection established...</li>
+                <li class="text-gray-500"><span class="text-sec-green">>></span> Verify identity... OK</li>
+                <li class="text-gray-500"><span class="text-sec-green">>></span> Handshake complete.</li>
+                <li class="text-gray-500"><span class="text-sec-green">>></span> Loading user profile...</li>
+                <li class="text-sec-cyan animate-pulse">_</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Actions -->
+    <div class="mt-8 flex justify-end">
         <a href="{{ url_for('main.logout') }}">
             <button
-                class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow transition duration-300 transform hover:scale-105">
-                Log Out
+                class="bg-transparent border border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bold py-2 px-6 rounded-none transition-all uppercase text-sm tracking-widest">
+                TERMINATE_SESSION
             </button>
         </a>
     </div>
 </div>
+
+<script>
+    // Simple digital clock
+    setInterval(() => {
+        const now = new Date();
+        document.getElementById('clock').innerText = now.toLocaleTimeString('en-US', { hour12: false });
+    }, 1000);
+</script>
 {% endblock %}

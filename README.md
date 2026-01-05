@@ -1,8 +1,23 @@
-# Secure Flask App
+# Secure Flask App - Internship Report
 
-A secure, modern web application built with Flask, implementing best security practices and a premium user interface.
+A secure, modern web application built with Flask, developed as part of my **Cybersecurity Internship**. This project demonstrates best security practices, modular architecture, and a premium "Secure System" aesthetic.
 
-## 🚀 Features
+## � Screenshots
+
+### Login & Registration
+
+![Login Page](screenshots/login.png)
+*Secure authentication gateway with dark security theme.*
+
+![Signup Page](screenshots/signup.png)
+*User registration with strict security requirements.*
+
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+*User dashboard featuring live metrics and system logs.*
+
+## �🚀 Features
 
 ### Security
 
